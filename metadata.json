@@ -1,0 +1,6 @@
+{
+  "name": "Incredible India Explorer",
+  "description": "Immersive cultural heritage and travel planner exploring India's 29 states, artisan crafts, optimized budget routes, and interactive trip logistics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #0d0f13;
+    color: #f1f5f9;
+  }
+
+  h1, h2, h3, .font-serif-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-brand {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom subtle dark geometric pattern */
+.bg-subtle-pattern {
+  background-color: #0d0f13;
+  background-image: radial-gradient(rgba(245, 158, 11, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.bg-pattern-dark {
+  background-color: #101318;
+  background-image: linear-gradient(30deg, #13171f 12%, transparent 12.5%, transparent 87%, #13171f 87.5%, #13171f),
+    linear-gradient(150deg, #13171f 12%, transparent 12.5%, transparent 87%, #13171f 87.5%, #13171f),
+    linear-gradient(30deg, #13171f 12%, transparent 12.5%, transparent 87%, #13171f 87.5%, #13171f),
+    linear-gradient(150deg, #13171f 12%, transparent 12.5%, transparent 87%, #13171f 87.5%, #13171f),
+    linear-gradient(60deg, #11141b 25%, transparent 25.5%, transparent 75%, #11141b 75%, #11141b),
+    linear-gradient(60deg, #11141b 25%, transparent 25.5%, transparent 75%, #11141b 75%, #11141b);
+  background-size: 40px 70px;
+  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0f13;
+}
+::-webkit-scrollbar-thumb {
+  background: #252b36;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
