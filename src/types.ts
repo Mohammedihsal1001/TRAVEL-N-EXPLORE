@@ -13,6 +13,16 @@ export interface StateCraft {
   authenticityTip: string;
 }
 
+export interface StateAttraction {
+  name: string;
+  image: string;
+  category: 'Monument' | 'Palace & Fort' | 'Temple & Spiritual' | 'Nature & Landscape' | 'Wildlife' | 'Heritage & Culture';
+  description: string;
+  timings?: string;
+  entryFee?: string;
+  unescoCertified?: boolean;
+}
+
 export interface StateData {
   id: string;
   name: string;
@@ -27,6 +37,7 @@ export interface StateData {
   stayCostPerNight: string;
   dailyBudgetEstimate: number;
   topAttractions: string[];
+  attractions: StateAttraction[];
   signatureFood: string[];
   transitAccess: {
     rail: string;

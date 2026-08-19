@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, MapPin, Compass, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Search, X, Compass, ArrowRight, Image as ImageIcon } from 'lucide-react';
 import { STATES_DATA } from '../data/statesData';
 import { StateData } from '../types';
 
@@ -36,6 +36,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       s.region.toLowerCase().includes(q) ||
       s.capital.toLowerCase().includes(q) ||
       s.topAttractions.some((a) => a.toLowerCase().includes(q)) ||
+      s.attractions?.some((a) => a.name.toLowerCase().includes(q) || a.category.toLowerCase().includes(q)) ||
       s.signatureFood.some((f) => f.toLowerCase().includes(q))
     );
   });
@@ -52,7 +53,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search any state, craft (e.g. Bandhani, Pashmina, Chikan), monument or dish..."
+            placeholder="Search any state, attraction (e.g. Hawa Mahal, Pangong, Kaziranga), or craft..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full bg-transparent text-sm text-slate-100 placeholder-slate-500 focus:outline-none"
@@ -70,9 +71,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {!query.trim() ? (
             <div className="py-8 text-center text-xs text-slate-400 space-y-3">
               <Compass className="w-8 h-8 mx-auto text-amber-400/60" />
-              <p>Type keywords like "Kashmir", "Silk", "Temple", "Tea", "Rajasthan"</p>
+              <p>Type state name, heritage craft, or specific monuments to view photos &amp; details</p>
               <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-                {['Bandhani', 'Lucknowi Chikan', 'Kanchipuram Silk', 'Madhubani', 'Taj Mahal', 'Alleppey'].map((tag) => (
+                {['Amber Fort', 'Hawa Mahal', 'Taj Mahal', 'Dal Lake', 'Pangong Tso', 'Kaziranga', 'Meenakshi Temple', 'Alleppey'].map((tag) => (
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}
@@ -85,7 +86,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             </div>
           ) : results.length === 0 ? (
             <div className="py-8 text-center text-xs text-slate-400">
-              No matching state or craft found for "{query}".
+              No matching state, attraction or craft found for "{query}".
             </div>
           ) : (
             results.map((state) => (
@@ -99,10 +100,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               >
                 <div className="flex items-center gap-3.5">
                   <img
-                    src={state.craft.image}
+                    src={state.heroImage}
                     alt={state.name}
                     referrerPolicy="no-referrer"
-                    className="w-12 h-12 rounded-lg object-cover border border-[#273042]"
+                    className="w-14 h-14 rounded-lg object-cover border border-[#273042] shrink-0"
                   />
                   <div>
                     <div className="flex items-center gap-2">
@@ -112,17 +113,23 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       <span className="px-2 py-0.5 rounded text-[9px] font-bold uppercase bg-[#102b1f] text-[#34d399]">
                         {state.region}
                       </span>
+                      <span className="text-[10px] text-amber-300 font-mono">
+                        {state.attractions?.length || state.topAttractions.length} Places
+                      </span>
                     </div>
                     <p className="text-xs text-amber-400 font-medium">
                       {state.craft.name}
                     </p>
-                    <span className="text-[10px] text-slate-400">
-                      Best: {state.bestMonths} • Est. {state.stayCostPerNight}
-                    </span>
+                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-0.5">
+                      <ImageIcon className="w-3 h-3 text-slate-500" />
+                      <span className="truncate max-w-[300px]">
+                        {state.topAttractions.slice(0, 3).join(' • ')}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-400 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-amber-400 group-hover:translate-x-1 transition-transform shrink-0" />
               </div>
             ))
           )}
